@@ -1,0 +1,44 @@
+html body {
+    background-color: #3aafa9;
+}
+
+nav {
+    background-color: #17252A;
+}
+
+
+
+main {
+    background-color:#3aafa9;
+   
+
+}
+
+/* form {
+    background-color: #3aafa9;
+} */
+
+div {
+    background-color: #3aafa9; 
+}
+
+.time {
+    color: white;
+    font-size: 20px;
+    text-emphasis: bold;
+    padding: 2px;
+    font-family: Impact, sans-serif;
+}
+
+/* .btn {
+    align-content: center;
+} */
+
+  
+  .vertical-center {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+  }
