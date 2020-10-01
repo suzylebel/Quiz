@@ -1,5 +1,4 @@
 
-
 var currentQuestion = 0;
 const timer = document.querySelector('h1');
 var startButton = document.getElementById("startbutton");
@@ -33,6 +32,12 @@ function hide() {
   welcome.setAttribute("style", "visibility:hidden");
 }
 
+function show () {
+  var showbox = document.querySelector("#questioncontainer");
+
+ showbox.setAttribute("style", "visibility:visible");
+}
+
 
 // QUESTION ARRAY
 
@@ -40,27 +45,27 @@ var quizArr = [
   {
     "questionTitle": "Which of these is not a JavaScript data type?",
     "multipleChoice": ["Number", "Element", "Object", "Boolean"],
-    "answer": "B",
+    "answer": 1,
 
   },
 
   {
     "questionTitle": "The Dom is an application programming interface valid for ?",
     "multipleChoice": ["Visual Studio Code", "Goggle Chrome", "CSS", "HTML"],
-    "answer": "HTML",
+    "answer": 4,
 
   },
 
   {
     "questionTitle": "Question 3?",
     "multipleChoice": ["A", "B", "C", "D"],
-    "answer": "A",
+    "answer": 0,
 
   },
   {
     "questionTitle": "Question 4?",
     "multipleChoice": ["A", "B", "C", "D"],
-    "answer": "B",
+    "answer": 3,
 
   },
 ];
@@ -100,40 +105,51 @@ function displayQuestion(qstion, choice) {
 
 };
 
-questionsEl.onclick =  function (event) {
-  let li = event.target.closest("li");
-  if (!li) return;
-  if (!questionsEl.contains(li)) return;
-  if (li.textContent === quizArr[currentQuestion].answer) {
-    currentQuestion++;
-    playQuiz();
-  // } else {
-  //   alert("game over")
-  }
-}
+// questionsEl.onclick =  function (event) {
+//   let li = event.target.closest("li");
+//   if (!li) return;
+//   if (!questionsEl.contains(li)) return;
+//   if (li.textContent === quizArr[currentQuestion].answer) {
+//     currentQuestion++;
+//     playQuiz();
+//   // } else {
+//   //   alert("game over")
+//   }
+// }
 
 function playQuiz() {
+  hide ();
   if (currentQuestion < quizArr.length) {
-    displayQuestion(
+    displayQuestion (
       quizArr[currentQuestion].questionTitle,
-      quizArr[currentQuestion].multipleChoice
-
+      quizArr[currentQuestion].multipleChoice)
+      startTimer (); 
       // game mechanics (while loop) 
 
-    );
+    
   } else {
     alert("Game over")
   }
 }
 
-// function selectAnswer() {
 
-// }
+// conditional statements
+// separate if statement for if answer correct
+function selectAnswer(answer) {
+if (answer !== quizArr[currentQuestion].answer ) {
+  timeSecond -= 10 
+}
+currentQuestion++ 
+playQuiz();
+hide ();
+show ();
+
+}
 
 
 // Event Listeners
-document.getElementById("startbutton").addEventListener("click", startTimer);
-document.getElementById("startbutton").addEventListener("click", hide);
+// document.getElementById("startbutton").addEventListener("click", startTimer);
+// document.getElementById("startbutton").addEventListener("click", hide);
 document.getElementById("startbutton").addEventListener("click", playQuiz);
 // document.getElementById("startbutton").addEventListener("click, ____")
 
