@@ -1,4 +1,7 @@
 
+window.addEventListener("onload", hide("#questionContainer"));
+
+
 var currentQuestion = 0;
 const timer = document.querySelector('h1');
 var startButton = document.getElementById("startbutton");
@@ -27,15 +30,14 @@ function startTimer() {
 }
 
 // hide timer on click
-function hide() {
-  var welcome = document.querySelector("#welcome");
-  welcome.setAttribute("style", "visibility:hidden");
+function hide(elementHide) {
+  var welcome = document.querySelector(elementHide);
+  welcome.setAttribute("style", "display:none");
 }
 
-function show () {
-  var showbox = document.querySelector("#questioncontainer");
-
- showbox.setAttribute("style", "visibility:visible");
+function show(showElements) {
+  var showbox = document.querySelector(showElements);
+  showbox.setAttribute("style", "display:block");
 }
 
 
@@ -80,21 +82,38 @@ function displayQuestion(qstion, choice) {
   questionsEl.appendChild(questionTitle);
 
 
-  var choiceA = document.createElement("button");
-  var choiceB = document.createElement("button");
-  var choiceC = document.createElement("button");
-  var choiceD = document.createElement("button");
+  var choiceA = document.getElementById("btn1");
+  var choiceB = document.getElementById("btn2");
+  var choiceC = document.getElementById("btn3");
+  var choiceD = document.getElementById("btn4");
   var questiontitlebox = document.createElement("ol");
-  
+
+
 
   var nodeA = document.createTextNode(choice[0]);
   choiceA.appendChild(nodeA);
+
+  // document.getElementById("btn1").removeChild(document.getElementById("btn1").firstChild);
   var nodeB = document.createTextNode(choice[1]);
   choiceB.appendChild(nodeB);
+
+  // document.getElementById("btn2").removeChild(document.getElementById("btn2").firstChild);
   var nodeC = document.createTextNode(choice[2]);
   choiceC.appendChild(nodeC);
+  // document.getElementById("btn3").removeChild(document.getElementById("btn3").firstChild);
   var nodeD = document.createTextNode(choice[3]);
   choiceD.appendChild(nodeD);
+  // document.getElementById("btn4").removeChild(document.getElementById("btn4").firstChild);
+
+
+  // choiceA.removeChild(choiceA.firstChild);
+  // choiceA.createTextNode(choice[0]);
+
+
+  // choiceB.innerHTML(choice[1]);
+  // choiceC.innerHTML(choice[2]);
+  // choiceD.innerHTML(choice[3]);
+
 
   questionContainerEl.appendChild(questiontitlebox);
   questiontitlebox.appendChild(choiceA);
@@ -118,15 +137,16 @@ function displayQuestion(qstion, choice) {
 // }
 
 function playQuiz() {
-  hide ();
+  hide("#welcome");
   if (currentQuestion < quizArr.length) {
-    displayQuestion (
+    displayQuestion(
       quizArr[currentQuestion].questionTitle,
       quizArr[currentQuestion].multipleChoice)
-      startTimer (); 
-      // game mechanics (while loop) 
+    startTimer();
+    show("#questionContainer");
+    // game mechanics (while loop) 
 
-    
+
   } else {
     alert("Game over")
   }
@@ -136,13 +156,13 @@ function playQuiz() {
 // conditional statements
 // separate if statement for if answer correct
 function selectAnswer(answer) {
-if (answer !== quizArr[currentQuestion].answer ) {
-  timeSecond -= 10 
-}
-currentQuestion++ 
-playQuiz();
-hide ();
-show ();
+  if (answer !== quizArr[currentQuestion].answer) {
+    timeSecond -= 10
+  }
+  currentQuestion++
+  playQuiz();
+  hide();
+  // show ();
 
 }
 
